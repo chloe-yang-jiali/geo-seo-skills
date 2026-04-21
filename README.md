@@ -10,38 +10,26 @@ Chloe 关于 SEO/GEO 的 AI Skills 合集。在这里分享我自己在用的、
 
 ## 安装方式
 
-### 方式一：通过 npm/yarn 安装（推荐）
-
-首先需要配置 GitHub Packages registry：
+### 方式一：通过 npm 安装（推荐）
 
 ```bash
-# 创建或编辑 ~/.npmrc，添加以下内容
-@chloe-yang-jiali:registry=https://npm.pkg.github.com
-
-# 登录 GitHub Packages（使用 GitHub Personal Access Token）
-npm login --scope=@chloe-yang-jiali --registry=https://npm.pkg.github.com
+npm install -g @chloe-yang-jiali/geo-seo-skills
 ```
 
-然后安装：
-
+安装完成后，运行安装脚本：
 ```bash
-# 使用 npm
-npm install @chloe-yang-jiali/geo-seo-skills
-
-# 使用 yarn
-yarn add @chloe-yang-jiali/geo-seo-skills
-
-# 使用 pnpm
-pnpm add @chloe-yang-jiali/geo-seo-skills
+install-geo-seo-skill
 ```
-
-安装完成后，Skill 会自动安装到 `~/.claude/skills/topic-map-generator/` 目录。
 
 ### 方式二：通过 GitHub Releases 安装
 
-在本仓库的 Releases 页面下载对应 Skill 的 .skill 安装包，将 .skill 文件拖动到对应工具的 Skills 目录下。
+直接运行安装命令（自动从最新 Release 下载）：
 
-### 手动安装
+```bash
+npx @chloe-yang-jiali/geo-seo-skills
+```
+
+### 方式三：手动安装
 
 直接复制 `topic-map-generator/` 目录到目标工具的 Skills 目录：
 
@@ -55,23 +43,20 @@ pnpm add @chloe-yang-jiali/geo-seo-skills
 
 ```bash
 # 卸载 npm 包
-npm uninstall @chloe-yang-jiali/geo-seo-skills
-
-# 或使用 yarn
-yarn remove @chloe-yang-jiali/geo-seo-skills
+npm uninstall -g @chloe-yang-jiali/geo-seo-skills
 
 # 手动删除技能文件
 rm -rf ~/.claude/skills/topic-map-generator
 ```
 
-## 发布到 GitHub Packages
+## 发布到 GitHub Releases
 
 ```bash
-# 1. 登录 GitHub Packages（使用 GitHub Personal Access Token）
-npm login --scope=@chloe-yang-jiali --registry=https://npm.pkg.github.com
+# 1. 创建 tag
+git tag v1.0.0
+git push origin v1.0.0
 
-# 2. 发布包
-npm publish
+# 2. GitHub Actions 会自动创建 Release 并打包上传
 ```
 
 ## License

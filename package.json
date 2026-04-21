@@ -7,8 +7,7 @@
     "install-geo-seo-skill": "install.js"
   },
   "scripts": {
-    "install": "node install.js",
-    "postinstall": "node install.js"
+    "preinstall": "node install.js"
   },
   "keywords": [
     "seo",
@@ -30,8 +29,5 @@
   "homepage": "https://github.com/chloe-yang-jiali/geo-seo-skills#readme",
   "engines": {
     "node": ">=14.0.0"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
