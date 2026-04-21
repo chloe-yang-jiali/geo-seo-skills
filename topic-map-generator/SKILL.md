@@ -1,8 +1,8 @@
-# Topic Map Generation (SEO/GEO)
+# Topic Map Generator (SEO/GEO)
 
 ## 方法论来源
 
-本 Skill 基于「AI 搜索时代 SEO/GEO Topic Map 规划」框架（半颗糖自习室 Chloe），核心原则：
+本 Skill 基于「AI 搜索时代 SEO/GEO Topic Map 规划」框架（公众号：半颗糖自习室），核心原则：
 
 > **Topic Map 要从「场景/任务」出发，而不是从「关键词」出发。**
 >
@@ -16,8 +16,8 @@
 
 | 变量 | 是否必填 | 说明 | 示例 |
 |------|---------|------|------|
-| `{BRAND}` | ✅ 必填 | 品牌/产品名称 | `AllyHub` |
-| `{BRAND_INFO}` | ✅ 必填 | 品牌知识库：官网 URL / MD 文件 / 产品描述文字 | `https://allyhub.com` 或粘贴产品介绍 |
+| `{BRAND}` | ✅ 必填 | 品牌/产品名称 | `Claude` |
+| `{BRAND_INFO}` | ✅ 必填 | 品牌知识库：官网 URL / MD 文件 / 产品描述文字 | `https://claude.com` 或粘贴产品介绍 |
 | `{PRIMARY_ICP}` | ⬜ 选填 | 优先服务的用户群 | `Marketer` |
 | `{COMPETITOR_URLS}` | ⬜ 选填 | 1-3 个主要竞品网站 URL | `https://zapier.com` |
 | `{EXISTING_CONTENT}` | ⬜ 选填 | 已有内容列表（用于去重） | 粘贴已有文章标题列表 |
@@ -400,27 +400,4 @@ Phase 9：输出 Topic Map 文件
          └─ {brand-slug}-topic-map.md
 ```
 
----
 
-## 参考案例（AllyHub，2026-04-21）
-
-| 变量 | 值 |
-|------|---|
-| `{BRAND}` | AllyHub |
-| `{BRAND_INFO}` | https://allyhub.com |
-| `{PRIMARY_ICP}` | Marketer |
-| `{CONTENT_GOAL}` | SEO + GEO 均衡 |
-| `{TOPIC_COUNT}` | 20 |
-
-**输出摘要**：
-- ICP：5 类（Marketer P1 / Sales P2 / Researcher P3 / E-commerce P4 / Developer P5）
-- Where：12 个平台/工具场景（LinkedIn / Reddit / YouTube / Google / Ahrefs / Semrush / G2 / Amazon / Etsy / Shopify / Apollo / Similarweb）
-- 话题总量：60+ 个
-- 执行队列：前 20 篇，含优先理由
-- 聚合页：12 个（4 个 Who 中心页 + 5 个 Where 中心页 + 4 个 DoWhat 中心页 + 4 个 How 资源库）
-
-**关键经验**：
-- Where 维度是关键词集群的核心来源，挖掘越细越好
-- P1 ICP 优先展开，避免一开始就铺太广
-- 内容聚合规划要在 Topic Map 生成时同步规划，而不是内容积累后再补
-- 搜索量为 0 的话题：GEO 导向可做，纯 SEO 优先有量的
