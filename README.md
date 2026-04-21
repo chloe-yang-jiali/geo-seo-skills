@@ -10,26 +10,15 @@ Chloe 关于 SEO/GEO 的 AI Skills 合集。在这里分享我自己在用的、
 
 ## 安装方式
 
-### 方式一：通过 npm 安装（推荐）
-
-```bash
-npm install -g @chloe-yang-jiali/geo-seo-skills
-```
-
-安装完成后，运行安装脚本：
-```bash
-install-geo-seo-skill
-```
-
-### 方式二：通过 GitHub Releases 安装
-
-直接运行安装命令（自动从最新 Release 下载）：
+### 一键安装（推荐）
 
 ```bash
 npx @chloe-yang-jiali/geo-seo-skills
 ```
 
-### 方式三：手动安装
+这会自动从 GitHub 下载最新版本，无需任何认证。
+
+### 手动安装
 
 直接复制 `topic-map-generator/` 目录到目标工具的 Skills 目录：
 
@@ -42,21 +31,24 @@ npx @chloe-yang-jiali/geo-seo-skills
 ## 卸载方式
 
 ```bash
-# 卸载 npm 包
-npm uninstall -g @chloe-yang-jiali/geo-seo-skills
-
-# 手动删除技能文件
+# 删除技能文件
 rm -rf ~/.claude/skills/topic-map-generator
 ```
 
-## 发布到 GitHub Releases
+## 发布更新
 
 ```bash
-# 1. 创建 tag
-git tag v1.0.0
-git push origin v1.0.0
+# 1. 更新版本号（在 package.json 中修改 version 字段）
+# 2. 提交并推送
+git add .
+git commit -m "描述你的更改"
+git push origin main
 
-# 2. GitHub Actions 会自动创建 Release 并打包上传
+# 3. 创建 tag
+git tag v1.0.2
+git push origin v1.0.2
+
+# 4. GitHub Actions 会自动创建 Release
 ```
 
 ## License

@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
 const { execSync } = require('child_process');
 
 const SKILL_NAME = 'topic-map-generator';
@@ -11,54 +10,52 @@ const REPO_NAME = 'geo-seo-skills';
 const SOURCE_DIR = path.join(__dirname, 'topic-map-generator');
 const TARGET_DIR = path.join(process.env.HOME || process.env.USERPROFILE, '.claude', 'skills', SKILL_NAME);
 
-console.log(`\n📦 Installing ${SKILL_NAME} Skill for Claude Code...\n`);
-
-// Get latest release download URL
-function getLatestReleaseUrl() {
+// Get latest tag
+function getLatestTag() {
   try {
     const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`;
     const response = execSync(`curl -s "${apiUrl}"`, { encoding: 'utf8' });
     const data = JSON.parse(response);
-    const zipAsset = data.assets?.find(asset => asset.name === 'topic-map-generator.zip');
-    return zipAsset?.browser_download_url;
+    return data.tag_name;
   } catch {
-    return null;
+    return 'main';
   }
 }
 
-// Download and extract from GitHub Releases
-function downloadFromReleases() {
-  console.log('📡 Downloading from GitHub Releases...\n');
+// Download from GitHub via jsDelivr CDN (no auth required)
+function downloadFromGitHub() {
+  console.log('📡 Downloading from GitHub (via jsDelivr CDN)...\n');
 
-  const downloadUrl = getLatestReleaseUrl();
-  if (!downloadUrl) {
-    throw new Error('Could not find latest release. Please check if the tag exists.');
+  const tag = getLatestTag();
+  const baseUrl = `https://cdn.jsdelivr.net/gh/${REPO_OWNER}/${REPO_NAME}@${tag}/topic-map-generator`;
+
+  const files = ['SKILL.md'];
+
+  // Check if there are additional files
+  try {
+    const listUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/topic-map-generator?ref=${tag}`;
+    const response = execSync(`curl -s "${listUrl}"`, { encoding: 'utf8' });
+    const data = JSON.parse(response);
+    if (Array.isArray(data)) {
+      data.forEach(item => {
+        if (item.type === 'file' && item.name !== 'SKILL.md') {
+          files.push(item.name);
+        }
+      });
+    }
+  } catch {
+    // Use default files list
   }
 
-  const zipPath = path.join(TARGET_DIR, 'topic-map-generator.zip');
-  const extractDir = path.join(TARGET_DIR, 'extracted');
+  // Download each file
+  files.forEach(file => {
+    const url = `${baseUrl}/${file}`;
+    const dest = path.join(TARGET_DIR, file);
+    console.log(`Downloading ${file}...`);
+    execSync(`curl -sL "${url}" -o "${dest}"`, { stdio: 'inherit' });
+  });
 
-  // Download
-  execSync(`curl -sL "${downloadUrl}" -o "${zipPath}"`, { stdio: 'inherit' });
-  console.log('✅ Downloaded release package\n');
-
-  // Extract
-  fs.mkdirSync(extractDir, { recursive: true });
-  execSync(`unzip -o "${zipPath}" -d "${extractDir}"`, { stdio: 'inherit' });
-
-  // Move files out of extracted folder
-  const extractedSkillDir = path.join(extractDir, 'topic-map-generator');
-  if (fs.existsSync(extractedSkillDir)) {
-    fs.readdirSync(extractedSkillDir).forEach(file => {
-      fs.copyFileSync(path.join(extractedSkillDir, file), path.join(TARGET_DIR, file));
-    });
-  }
-
-  // Cleanup
-  fs.rmSync(zipPath, { force: true });
-  fs.rmSync(extractDir, { recursive: true, force: true });
-
-  console.log('✅ Extracted skill files\n');
+  console.log('✅ Downloaded skill files from GitHub\n');
 }
 
 try {
@@ -68,42 +65,8 @@ try {
     console.log(`✅ Created directory: ${TARGET_DIR}`);
   }
 
-  // Try downloading from GitHub Releases first
-  try {
-    downloadFromReleases();
-  } catch (err) {
-    console.log('⚠️ Could not download from GitHub Releases, using local files...\n');
-
-    // Fallback to local files
-    const sourceFile = path.join(SOURCE_DIR, 'SKILL.md');
-    const targetFile = path.join(TARGET_DIR, 'SKILL.md');
-
-    if (fs.existsSync(sourceFile)) {
-      fs.copyFileSync(sourceFile, targetFile);
-      console.log(`✅ Installed SKILL.md to: ${targetFile}`);
-    } else {
-      throw new Error(`SKILL.md not found at: ${sourceFile}`);
-    }
-
-    // Copy any additional files if they exist
-    if (fs.existsSync(SOURCE_DIR)) {
-      const files = fs.readdirSync(SOURCE_DIR);
-      files.forEach(file => {
-        if (file !== 'SKILL.md' && !file.startsWith('.')) {
-          const src = path.join(SOURCE_DIR, file);
-          const dest = path.join(TARGET_DIR, file);
-          const stat = fs.statSync(src);
-          if (stat.isFile()) {
-            fs.copyFileSync(src, dest);
-            console.log(`✅ Copied ${file} to: ${dest}`);
-          } else if (stat.isDirectory()) {
-            copyDirSync(src, dest);
-            console.log(`✅ Copied directory ${file}/ to: ${dest}`);
-          }
-        }
-      });
-    }
-  }
+  // Download from GitHub (no auth required)
+  downloadFromGitHub();
 
   console.log(`\n✨ Successfully installed ${SKILL_NAME} Skill!\n`);
   console.log('The skill is now available in Claude Code.\n');
@@ -113,20 +76,4 @@ try {
 } catch (error) {
   console.error('\n❌ Installation failed:', error.message, '\n');
   process.exit(1);
-}
-
-function copyDirSync(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-
-    if (entry.isDirectory()) {
-      copyDirSync(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
 }
