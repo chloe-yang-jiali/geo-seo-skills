@@ -15,7 +15,7 @@ Skill	说明	讲解
 
 在 Claude Code、Codex、OpenClaw 等支持 Skill 的 Agent 中，直接对话：
 
-安装这个 skill：https://github.com/
+安装这个 [(https://github.com/chloe-yang-jiali/geo-seo-skills)
 
 ### 手动安装
 
