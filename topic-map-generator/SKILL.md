@@ -1,3 +1,9 @@
+---
+name: topic-map-generator
+description: |
+  A universal skill for generating SEO/GEO Topic Maps for any brand. Accepts BRAND name + brand knowledge base as primary inputs. Uses the Who × Do What × Where × How × Why scene-first framework to produce a fully structured, prioritized, and aggregation-ready Topic Map in Markdown format.
+---
+
 # Topic Map Generator (SEO/GEO)
 
 ## 方法论来源
