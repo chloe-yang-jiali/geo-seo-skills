@@ -10,13 +10,17 @@ Chloe 关于 SEO/GEO 的 AI Skills 合集。在这里分享我自己在用的、
 
 ## 安装方式
 
-### 一键安装（推荐）
+### 一键安装（推荐，无需登录）
 
+**Mac / Linux:**
 ```bash
-npx @chloe-yang-jiali/geo-seo-skills
+mkdir -p ~/.claude/skills/topic-map-generator && curl -sL "https://cdn.jsdelivr.net/gh/chloe-yang-jiali/geo-seo-skills@main/topic-map-generator/SKILL.md" -o ~/.claude/skills/topic-map-generator/SKILL.md
 ```
 
-这会自动从 GitHub 下载最新版本，无需任何认证。
+**Windows (PowerShell):**
+```powershell
+mkdir -p "$env:USERPROFILE\.claude\skills\topic-map-generator"; curl -sL "https://cdn.jsdelivr.net/gh/chloe-yang-jiali/geo-seo-skills@main/topic-map-generator/SKILL.md" -o "$env:USERPROFILE\.claude\skills\topic-map-generator\SKILL.md"
+```
 
 ### 手动安装
 
@@ -38,17 +42,13 @@ rm -rf ~/.claude/skills/topic-map-generator
 ## 发布更新
 
 ```bash
-# 1. 更新版本号（在 package.json 中修改 version 字段）
+# 1. 修改 topic-map-generator/SKILL.md
 # 2. 提交并推送
 git add .
-git commit -m "描述你的更改"
+git commit -m "更新 skill 内容"
 git push origin main
 
-# 3. 创建 tag
-git tag v1.0.2
-git push origin v1.0.2
-
-# 4. GitHub Actions 会自动创建 Release
+# 3. 用户重新运行安装命令即可获取最新版本
 ```
 
 ## License
