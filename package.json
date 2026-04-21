@@ -1,0 +1,34 @@
+{
+  "name": "@chloe-yang-jiali/geo-seo-skills",
+  "version": "1.0.0",
+  "description": "SEO/GEO Topic Map Generator Skill for Claude Code",
+  "main": "index.js",
+  "bin": {
+    "install-geo-seo-skill": "install.js"
+  },
+  "scripts": {
+    "install": "node install.js",
+    "postinstall": "node install.js"
+  },
+  "keywords": [
+    "seo",
+    "geo",
+    "topic-map",
+    "claude-code",
+    "claude-skill",
+    "claude"
+  ],
+  "author": "chloe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chloe-yang-jiali/geo-seo-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chloe-yang-jiali/geo-seo-skills/issues"
+  },
+  "homepage": "https://github.com/chloe-yang-jiali/geo-seo-skills#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
