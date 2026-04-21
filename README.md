@@ -6,7 +6,7 @@ Chloe 关于 SEO/GEO 的 AI Skills 合集。在这里分享我自己在用的、
 
 | Skill | 说明 | 讲解文章 |
 |-------------|---|-----------------------|
-| SEO/GEO Topic Map Generator | 独创"Who × Do What × Where × How × Why"框架法，从「场景/任务」出发，构建 AI 搜索时代的话题框架 | [AI 搜索时代，SEO/GEO Topic Map 怎么规划](https://mp.weixin.qq.com/s/ZFCVCk972eMluEKSfbMVLw) |
+| [SEO/GEO Topic Map Generator](https://github.com/chloe-yang-jiali/geo-seo-skills/tree/main/topic-map-generator) | 独创"Who × Do What × Where × How × Why"框架法，从「场景/任务」出发，构建 AI 搜索时代的话题框架 | [AI 搜索时代，SEO/GEO Topic Map 怎么规划](https://mp.weixin.qq.com/s/ZFCVCk972eMluEKSfbMVLw) |
 
 ## 安装方式
 
