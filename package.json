@@ -30,5 +30,8 @@
   "homepage": "https://github.com/chloe-yang-jiali/geo-seo-skills#readme",
   "engines": {
     "node": ">=14.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

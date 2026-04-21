@@ -10,7 +10,19 @@ Chloe 关于 SEO/GEO 的 AI Skills 合集。在这里分享我自己在用的、
 
 ## 安装方式
 
-### 方式一：通过 npm/yarn/npx 安装（推荐）
+### 方式一：通过 npm/yarn 安装（推荐）
+
+首先需要配置 GitHub Packages registry：
+
+```bash
+# 创建或编辑 ~/.npmrc，添加以下内容
+@chloe-yang-jiali:registry=https://npm.pkg.github.com
+
+# 登录 GitHub Packages（使用 GitHub Personal Access Token）
+npm login --scope=@chloe-yang-jiali --registry=https://npm.pkg.github.com
+```
+
+然后安装：
 
 ```bash
 # 使用 npm
@@ -18,9 +30,6 @@ npm install @chloe-yang-jiali/geo-seo-skills
 
 # 使用 yarn
 yarn add @chloe-yang-jiali/geo-seo-skills
-
-# 使用 npx（不需要预先安装，直接运行）
-npx @chloe-yang-jiali/geo-seo-skills
 
 # 使用 pnpm
 pnpm add @chloe-yang-jiali/geo-seo-skills
@@ -55,17 +64,14 @@ yarn remove @chloe-yang-jiali/geo-seo-skills
 rm -rf ~/.claude/skills/topic-map-generator
 ```
 
-## 发布到 npm
+## 发布到 GitHub Packages
 
 ```bash
-# 登录 npm（如果未登录）
-npm login
+# 1. 登录 GitHub Packages（使用 GitHub Personal Access Token）
+npm login --scope=@chloe-yang-jiali --registry=https://npm.pkg.github.com
 
-# 发布包
+# 2. 发布包
 npm publish
-
-# 发布 beta 版本
-npm publish --tag beta
 ```
 
 ## License
